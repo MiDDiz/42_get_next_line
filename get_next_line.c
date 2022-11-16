@@ -44,16 +44,16 @@ int	append_last_read(char **line, char **prev_read)
 	{
 		return (1);
 	}
-	new_line = ft_strchr(*prev_read, '\n');
+	new_line = ft_gnlstrchr(*prev_read, '\n');
 	if (new_line != NULL)
 	{
-		ft_strappend(line, *prev_read, (size_t)(new_line - *(prev_read) + 1));
+		ft_gnlstrappend(line, *prev_read, (size_t)(new_line - *(prev_read) + 1));
 		swap = ft_strdup(new_line + 1);
 		free(*prev_read);
 		*prev_read = swap;
 		return (0);
 	}
-	ft_strappend(line, *prev_read, ft_strlen(*prev_read));
+	ft_gnlstrappend(line, *prev_read, gnlft_strlen(*prev_read));
 	free(*prev_read);
 	*prev_read = NULL;
 	return (1);
@@ -70,15 +70,15 @@ void	read_from_fd(int fd, char **line, char **prev_read)
 	while (num_c > 0)
 	{
 		buff[num_c] = '\0';
-		new_line = ft_strchr((char *)buff, '\n');
+		new_line = ft_gnlstrchr((char *)buff, '\n');
 		if (new_line != NULL)
 		{
-			ft_strappend(line, buff, new_line - buff + 1);
-			ft_strappend(prev_read, new_line + 1, ft_strlen(new_line));
+			ft_gnlstrappend(line, buff, new_line - buff + 1);
+			ft_gnlstrappend(prev_read, new_line + 1, gnlft_strlen(new_line));
 			free(buff);
 			return ;
 		}
-		ft_strappend(line, buff, num_c);
+		ft_gnlstrappend(line, buff, num_c);
 		num_c = read(fd, buff, BUFFER_SIZE);
 	}
 	free(buff);
@@ -89,7 +89,7 @@ char	*ft_strdup(const char *src)
 	char	*output_str;
 	int		i;
 
-	output_str = (char *) malloc(sizeof (*src) * (ft_strlen(src) + 1));
+	output_str = (char *) malloc(sizeof (*src) * (gnlft_strlen(src) + 1));
 	if (!output_str)
 		return (NULL);
 	i = 0;

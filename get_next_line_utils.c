@@ -12,7 +12,7 @@
 
 #include "./get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_gnlstrchr(const char *s, int c)
 {
 	char	*str;
 
@@ -32,30 +32,30 @@ char	*ft_strchr(const char *s, int c)
 	Generates a new string joining both strings together.
 	The resulting string replaces *s1
 */
-void	ft_strappend(char **s1, const char *s2, size_t len_s2)
+void	ft_gnlstrappend(char **s1, const char *s2, size_t len_s2)
 {
 	size_t	s_len;
 	char	*new_str;
 
-	s_len = ft_strlen(*s1);
+	s_len = gnlft_strlen(*s1);
 	s_len += len_s2;
 	new_str = (char *)malloc(sizeof(char) * (s_len + 1));
 	if (!new_str)
 		return ;
 	if (*s1 != NULL)
 	{
-		ft_strlcpy(new_str, *s1, ft_strlen(*s1) + 1);
+		ft_gnlstrlcpy(new_str, *s1, gnlft_strlen(*s1) + 1);
 		free(*s1);
 	}
 	else
 		new_str[0] = '\0';
 	if (s2 != NULL)
-		ft_strlcat(new_str, s2, s_len + 1);
+		ft_gnlstrlcat(new_str, s2, s_len + 1);
 	*s1 = new_str;
 	return ;
 }
 
-size_t	ft_strlen(const char *str)
+size_t	gnlft_strlen(const char *str)
 {
 	size_t	c;
 
@@ -69,12 +69,12 @@ size_t	ft_strlen(const char *str)
 	return (c);
 }
 
-void	ft_strlcat(char *dst, const char *src, size_t dstsize)
+void	ft_gnlstrlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	dst_n;
 	size_t	i;
 
-	dst_n = ft_strlen(dst);
+	dst_n = gnlft_strlen(dst);
 	i = 0;
 	if (dstsize > (dst_n + 1))
 	{
@@ -87,7 +87,7 @@ void	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	dst[dst_n + i] = '\0';
 }
 
-void	ft_strlcpy(char *dest, const char *src, size_t size)
+void	ft_gnlstrlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
 
